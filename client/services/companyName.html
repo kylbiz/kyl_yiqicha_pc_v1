@@ -1,0 +1,70 @@
+<template name="companyStatus">
+  <!-- {{> user}} -->
+  <div class="cbp-spmenu-push">
+  <div class="main" id="container">
+    {{> companyStatusQuery}}
+  </div>
+</div>
+</template>
+
+
+<template name="companyStatusQuery">
+  <div class="container">
+    <h2>名称核准</h2>
+    <div class="search-box">
+      <form>
+        <div class="search-before">
+          <div class="form-group clearfix col-xs-9">
+            <div class="col-xs-2"><span class="glyphicon glyphicon-hand-right"></span></div>
+            <div class="col-xs-10">
+              <input type="text" name="keywords" id="text" placeholder="请输入企业名称" >
+            </div>
+          </div>
+          <div class="col-xs-3"><input type="submit" class="btn btn-kyl btn-block mt30" value="马上查询" style="font-size: 1.8rem;height:52px"></div>
+        </div>
+      </form>
+      <div class="help-block clearfix">
+        <p class="text-left pull-left">注：本系统只提供名称核准状态参考，确切信息以当地工商信息为准。</p>
+      </div>
+      <hr>
+      {{> companyNameStatusResult}}
+    </div>
+  </div>
+</template>  
+
+
+<template name="companyNameStatusResult">
+  {{#if keywords}}
+    {{#if zeroresult}} 
+      <h3>查询名称为 <span class="text-kyl">{{keywords}}</span> 的结果不存在，请确认具体名称后查询</h3>
+    {{else}}
+      {{# if oneresult}}
+        {{#each companynameInfo}}
+          {{> companyStatusDetail}}
+        {{/each}}
+      {{else}}    
+        <h3>查询名称为 <span class="text-kyl">{{keywords}}</span> 的结果存在多条，请确认具体名称后查询</h3> 
+      {{/if}}       
+    {{/if}}  
+
+  {{/if}}
+
+</template>  
+
+
+<template name="companyStatusDetail">
+  <div class="search-end">
+    <div class="panel panel-default">
+      <div class="panel-heading">{{companyName}}</div>
+      <div class="panel-body">
+        <p>受理日期:{{acceptedDate}} </p>
+        <p>受理机关：{{acceptOrgan}}</p>
+        <p>申请状态：{{applayStatus}}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+

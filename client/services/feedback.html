@@ -1,0 +1,67 @@
+<template name="feedback">
+  <div class="cbp-spmenu-push">
+  <div class="main" id="container">
+    {{> feedbackQuery}}
+  </div>
+  </div>
+</template>
+
+<template name="feedbackQuery">
+  <div class="container">
+    <h2>工商出证</h2>
+    <div class="search-box">
+      <form>
+        <div class="search-before">
+          <div class="form-group clearfix col-xs-9">
+            <div class="col-xs-2"><span class="glyphicon glyphicon-hand-right"></span></div>
+            <div class="col-xs-10">
+              <input type="text" name="keywords" id="text" placeholder="请输入企业名称" >
+            </div>
+          </div>
+          <div class="col-xs-3"><input type="submit" class="btn btn-kyl btn-block mt30" value="马上查询" style="font-size: 1.8rem;height:52px"></div>
+        </div>
+      </form>
+      <div class="help-block clearfix">
+        <p class="text-left pull-left">注：本系统只提供工商营业执照办理状态参考，确切信息以当地工商信息为准。</p>
+      </div>
+      <hr>
+      {{> feedbackResult}}
+    </div>
+  </div>
+
+</template>  
+
+
+
+<template name="feedbackResult">
+  <div class="search-end">
+    {{#if keywords}}
+      {{#if zeroresult}} 
+        <h3>查询名称为 <span class="text-kyl">{{keywords}}</span> 的结果不存在，请确认具体名称后查询</h3>
+        {{else}}
+          {{#if oneresult}}
+            {{#each registrationStatusInfo}}
+              {{> registrationFeedbackDetail}}
+            {{/each}}
+          {{else}}    
+            <h3>查询名称为 <span class="text-kyl">{{keywords}}</span> 的结果存在多条，请确认具体名称后查询</h3> 
+          {{/if}} 
+      {{/if}}       
+    {{/if}}
+  </div>
+</template>  
+
+
+<template name="registrationFeedbackDetail">
+  <div class="search-end">
+    <div class="panel panel-default">
+      <div class="panel-heading">{{companyName}}</div>
+      <div class="panel-body">
+        <p>申请日期:{{applyDate}}</p>
+        <p>状态：{{registrationStatus}}</p>
+      </div>
+    </div>
+  </div>
+</template>  
+
+

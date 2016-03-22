@@ -1,0 +1,328 @@
+<!-- <template name="ReigstrationModal">
+  <div class="modal fade" id="RegistrationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">详细信息</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="pull-left fluid">
+                <div class="list-group">
+                  <a href="#box_tab1" class="list-group-item selected" data-toggle="tab">基本信息</a>
+                  <a href="#box_tab2" class="list-group-item" data-toggle="tab">股东信息</a>
+                  <a href="#box_tab3" class="list-group-item" data-toggle="tab">备案信息</a>
+                  <a href="#box_tab4" class="list-group-item" data-toggle="tab">其他信息</a>
+                </div>
+              </div>
+              <div class="pull-left fluid-content">
+                <div class="tab-content">
+                  <div class="tab-pane fade in active" id="box_tab1">
+                    <table class="table table-bordered table-striped table-hover">
+                      <tbody>
+                        {{#each credit.basicDetail}}
+                        <tr>
+                          <td class="key"> {{key}}</td>
+                          <td class="value">{{value}}</td>
+                        </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="tab-pane fade" id="box_tab2">
+                    <table class="table table-bordered table-striped table-hover table-padding">
+                    {{#if credit.hasGotCredit}}
+                      <thead>
+                        <tr>
+                          <td colspan="6">
+                            <h4>股东信息</h4>
+                            <p>股东的出资信息截止2014年2月28日。2014年2月28日之后工商只公示股东姓名，其他出资信息由企业自行公示。</p>
+                          </td>
+                        </tr>
+                        {{#if credit.investorsTableProperties}}
+                          <tr>
+                              <th>序号</th>
+                            {{#each credit.investorsTableProperties}}
+                              <th>{{key}}</th>
+                            {{/each}}
+                          </tr>
+                        {{else}}
+                         <tr>
+                            <td colspan="6">
+                              <h4>股东信息不存在！</h4>
+                            </td>
+                         </tr>
+                        {{/if}}
+                      </thead>
+                      <tbody>
+                          {{#each $mapped credit.registration.investorsTable}}
+                            <tr>
+                              <td class="text-center">{{$index}}</td>
+                            {{#each .}}
+                              {{#if $eq type "url"}}
+                              {{else}}
+                                <td class="text-left">{{value}}</td>
+                              {{/if}}
+                            {{/each}}
+                            </tr>
+                          {{/each}}
+                      </tbody>
+                    {{else}}
+                      <thead>
+                        <tr>
+                          <td>
+                            <h4>股东信息</h4>
+                            <p>股东的出资信息截止2014年2月28日。2014年2月28日之后工商只公示股东姓名，其他出资信息由企业自行公示。</p>
+                          </td>
+                        </tr>
+                      </thead>     
+                      <tbody>
+                      <tr>
+                        <td>
+                        <div class="wait-segement">
+                          <h4>正在获取数据，请耐心等候！</h4>
+                          <div>
+                            <div class="ball-pulse">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                          </div>                       
+                       </div> 
+                        </td>
+                      </tr>                       
+                      </tbody>               
+                    {{/if}}
+                      
+                    </table>
+                  </div>
+
+                  <div class="tab-pane fade" id="box_tab3">
+                    <table class="table table-bordered table-striped table-hover table-padding">
+                      <tbody>
+                        <tr>
+                          <th colspan="6">主要人员信息</th>
+                        </tr>                  
+                        {{#if credit.hasGotCredit}}
+                        {{#if credit.registration.recordInfo.memberTable}}
+                          {{#each credit.registration.recordInfo.memberTable}}
+                            <tr>
+                              {{#each .}}
+                                <td>{{key}}</td>
+                                <td>{{value}}</td>
+                              {{/each}}
+                            </tr>
+                          {{/each}}
+                        {{else}}                         
+                          <h4>主要人员信息不存在！</h4>
+                        {{/if}}
+                    {{else}}
+                     <div class="wait-segement">
+                        <h4>正在获取数据，请耐心等候！</h4>
+                        <div>
+                          <div class="ball-pulse">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                        </div>                       
+                     </div>
+                    {{/if}}
+                      </tbody>
+                    </table>
+                    <table class="table table-bordered table-striped table-hover table-padding">
+                      <tbody>
+                        <tr>
+                          <th colspan="6">分支机构信息</th>
+                        </tr>
+                      {{#if credit.hasGotCredit}}
+                        {{#if credit.branchTableProperties}}
+                          <tr>
+                            {{#each credit.branchTableProperties}}
+                              <th>{{key}}</th>
+                            {{/each}}
+                          </tr> 
+                        {{else}} 
+                          <h4>分支机构信息不存在！</h4>
+                        {{/if}}         
+
+                        {{#each credit.registration.recordInfo.branchTable}}
+                            <tr>
+                            {{#each .}}
+                              {{#if $eq type "url"}}
+
+                              {{else}}
+                                <td class="text-center">{{value}}</td>
+                              {{/if}}
+                            {{/each}}
+                            </tr>
+                        {{/each}}
+                      {{else}}
+                       <div class="wait-segement">
+                          <h4>正在获取数据，请耐心等候！</h4>
+                          <div>
+                            <div class="ball-pulse">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                          </div>                       
+                       </div>
+                      {{/if}}
+
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="tab-pane fade" id="box_tab4">
+                    <table class="table table-bordered table-striped table-hover table-padding">
+                      <tbody>
+                        <tr>
+                          <th colspan="6">变更信息</th>
+                        </tr>
+                        {{#if credit.hasGotCredit}}
+                          {{#if credit.changeInfosProperties}}
+                            <tr>
+                                <th>序号</th>
+                              {{#each credit.changeInfosProperties}}
+                                <th>{{key}}</th>
+                              {{/each}}
+                            </tr> 
+                          {{else}}          
+                            <h4>变更信息不存在</h4>
+                          {{/if}}
+                          {{#each $mapped credit.registration.changeInfos}}
+                              <tr>
+                                <td class="text-center">{{$index}}</td>
+                              {{#each .}}
+                                {{#if $eq type "url"}}
+                                {{else}}
+                                  <td class="text-center">{{value}}</td>
+                                {{/if}}
+                              {{/each}}
+                              </tr>
+                          {{/each}}
+                        {{else}}
+                         <div class="wait-segement">
+                            <h4>正在获取数据，请耐心等候！</h4>
+                            <div>
+                              <div class="ball-pulse">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                            </div>                       
+                         </div>
+                        {{/if}}                        
+                      </tbody>
+                    </table>
+
+                    <table class="table table-bordered table-striped table-hover table-padding">
+                      <tbody>
+                        <tr>
+                          <th colspan="6">撤销信息</th>
+                        </tr>
+                        {{#if credit.hasGotCredit}}
+                          {{#if credit.revocationInfosProperties}}
+                            <tr>
+                              <th>序号</th>
+                              {{#each credit.revocationInfosProperties}}
+                                <th>{{key}}</th>
+                              {{/each}}
+                            </tr>  
+                          {{else}}         
+                            <h4>撤销信息不能存在！</h4>
+                          {{/if}}
+                          {{#each $mapped credit.registration.revocationInfos}}
+                              <tr>
+                                <td class="text-center">{{$index}}</td>
+                              {{#each .}}
+                                {{#if $eq type "url"}}
+                                {{else}}
+                                  <td class="text-center">{{value}}</td>
+                                {{/if}}
+                              {{/each}}
+                              </tr>
+                          {{/each}}
+                        {{else}}
+                         <div class="wait-segement">
+                            <h4>正在获取数据，请耐心等候！</h4>
+                            <div>
+                              <div class="ball-pulse">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                            </div>                       
+                         </div>
+                        {{/if}}           
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="investdetailtemplate">
+  <tr class="toggle-table hidden">
+  <td colspan="6">
+    <table class="table table-bordered table-striped table-padding">
+      <tbody>
+        <tr>
+          <th colspan="9">股东及出资信息 </th>
+        </tr>
+        <tr>
+          <th rowspan="2">股东</th>
+          <th rowspan="2">认缴额
+            <br>（万元）</th>
+          <th rowspan="2">实缴额
+            <br>（万元）</th>
+          <th colspan="3">认缴明细</th>
+          <th colspan="3">实缴明细</th>
+        </tr>
+        <tr>
+          <th>认缴出资方式</th>
+          <th>认缴出资额
+            <br>（万元）</th>
+          <th>认缴出资日期</th>
+          <th>实缴出资方式</th>
+          <th>实缴出资额
+            <br>（万元）</th>
+          <th>实缴出资日期</th>
+        </tr>
+        <tr>
+          <td rowspan="2">魏丽芳</td>
+          <td rowspan="2">1.000000</td>
+          <td rowspan="2">51.000000</td>
+          <td>货币</td>
+          <td>1.000000</td>
+          <td></td>
+          <td>货币</td>
+          <td>45.900000</td>
+          <td>2010年11月30日</td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+          <td>货币</td>
+          <td>5.100000</td>
+          <td>2008年4月11日</td>
+        </tr>
+      </tbody>
+    </table>
+  </td>
+</tr>
+</template> -->

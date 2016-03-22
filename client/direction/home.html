@@ -1,0 +1,55 @@
+<template name="home">
+  <div class="landing-page">
+    <div class="wrapper container">
+      <div class="landing-con">
+        <h1>
+          <a href="/">
+            <img src="images/logo-big.png">
+          </a>
+        </h1>
+        {{>landpage}}
+        <div class="txt">
+          <h3>工商登记信息进度查询解决方案</h3>
+          <p>即刻绑定手机，实时推送工商登记进展，不必再苦苦追问你企业的消息</p>
+          <a href="registrations" class="btn btn-kyl">即刻体验</a> </div>
+      </div>
+      <div id="share">
+        <img src="images/share.png">
+      </div>
+      <div id="shareDetails">
+        <ul>
+          <li id="wechat">
+            <a href="#" style="z-index:2;position:relative">
+              <img src="images/wechat-contract.png">
+            </a>
+          </li>
+          <li id="weibo">
+            <a href="http://www.weibo.com/yiqicha" style="z-index:2;position:relative" target="_blank">
+              <img src="images/weibo.png">
+            </a>
+          </li>
+          <li id="email">
+            <a href="mailto:c@yiqicha.net" style="z-index:2;position:relative">
+              <img src="images/email.png">
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div id="wechat-div" style="height: 130px;">
+        <ul>
+          <li id="wechat-qr">
+            <img src="images/wechat-qr.png">
+          </li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div id="landpage"></div>
+    </div>
+    <div id="meteor">
+      <a href="http://www.meteor.com" style="z-index:2;position:relative" target="_blank">
+        <img src="images/meteor.png" width="80">
+      </a>
+    </div>
+  </div>
+</template>

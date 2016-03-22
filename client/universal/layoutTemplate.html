@@ -1,0 +1,58 @@
+<template name="layoutTemplate">
+  <html lang="zh-CN">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>一企查-企信自助工具</title>
+      <link rel="shortcut icon" href="/images/logo.ico" />
+      <script src="/script/ua.js"></script>
+  </head>
+  <body>
+      {{>navigation}}
+      {{>yield}}
+      {{>footer}}
+      {{>action_bar}}
+  </body>
+  </html>
+</template>
+
+<template name="navigation">
+  <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+    <ul id="weblinks">
+      <a href="registrations" class="active" alt="在线核名">
+        <span class="glyphicon glyphicon-search"></span>在线核名</a>
+      <a href="status" alt="名称核准">
+        <span class="glyphicon glyphicon-list-alt"></span>名称核准</a>
+      <a href="feedback" alt="工商出证">
+        <span class="glyphicon glyphicon-print"></span>工商出证</a>
+    </ul>
+    <ul id="otherlinks">
+      <a href="logs" alt="更新日志">更新日志</a>
+    </ul>
+  </nav>
+  <div class="top-header">
+    <div class="container">
+      <div class="logo pull-left">
+        <a href="/">
+          <img src="images/logo.png" title="一企查" alt="一企查">
+        </a>
+      </div>
+      <div class="nav pull-right">
+        <button id="showRightPush" class="nav-be"></button>
+      </div>
+    </div>
+    {{>landpage}}
+
+  </div>
+</template>
+
+<template name="footer">
+  <div class="footer">
+    <p>Copyright © 2015 一企查 版权所有</p>
+  </div>
+</template>
+
+<template name="action_bar">
+    <div id="back"> <a href="#"></a> </div>
+</template>
